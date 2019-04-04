@@ -1,0 +1,17 @@
+<ng-content></ng-content>
+<br>
+<div class="row">
+  <div class="input-field col s2">
+    <button class="btn-small btn-submit" 
+      type="button" [disabled]="!component.previous" (click)="component.goPrevious()">Voltar</button>
+  </div>
+  <div class="input-field col s8">
+  </div>
+  <div class="input-field col s2">
+    <button *ngIf="component.form.valid && !component._detailMode" class="btn-small btn-submit" 
+    [attr.disabled]=" component._submit ? 
+      undefined :
+      (component.next==='' ? true : undefined)"
+    type="button" (click)="component.goNext()">{{ component.next ? 'Avançar' : 'Salvar' }}</button>
+  </div>
+</div>

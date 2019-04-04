@@ -1,0 +1,14 @@
+<ng-content></ng-content>
+<br>
+<div class="row">
+  <div class="input-field col s2">
+    <button class="btn-small btn-submit" 
+      type="button" (click)="component.goBack()">Voltar</button>
+  </div>
+  <div class="input-field col s8">
+  </div>
+  <div class="input-field col s2">
+    <button *ngIf="component.form.valid && !component._detailMode" class="btn-small btn-submit" 
+    type="button" (click)="component.salvar()">Salvar</button>
+  </div>
+</div>

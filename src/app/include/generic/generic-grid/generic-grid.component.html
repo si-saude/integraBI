@@ -1,0 +1,72 @@
+<ng-content></ng-content>
+<div class="generic-grid" [ngStyle]="{'height':height}">
+  <thead>
+    <tr>
+      <th [ngClass]="d[2]==='checkbox' ? 'center' : ''" 
+        *ngFor="let d of def">
+        <label *ngIf="d[2]==='checkbox'">
+          <input type="checkbox" (change)="dirtyForm();selectAll(d[1],$event)"
+            [disabled]="!d[3] || component._detailMode" />
+          <span></span>
+        </label>
+        <br *ngIf="d[2]!=='checkbox'">
+        <p>{{d[0]}}</p>
+        <label style="font-size: medium">
+          <input type="text" *ngIf="d[2]!=='checkbox'" [(ngModel)]="filter[d[1]]" (ngModelChange)="changeFilter()" />
+          <span></span>
+        </label>
+        <br>
+        <label *ngIf="d[2]==='checkbox'">
+          <input type="checkbox" [value]="filter[d[1]]" checkboxFilter 
+            (changeValue)="filter[d[1]] = $event; changeBooleanFilter(d[1]);" />
+          <span></span>
+        </label>
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody> 
+    <tr (click)="rowClick ? component[rowClick](a) : ''" *ngFor="let a of (models | gridFilter : filter : this); let i = index"
+    [ngClass]="selection && checkSelected(a) ? 'generic-grid-selected' : 
+        ((rowClass ? component[rowClass](a) : '') + (rowClick ? ' cursor-pointer' : ''))">
+      <td [ngClass]="d[2]==='checkbox' ? 
+                            'center' : 
+                            d[2]==='' && selection ? 
+                              'cursor-pointer' : 
+                              (d[6] ? 
+                                  (checkSelectedCell(a, d[6]) ? 'cursor-pointer generic-grid-selected' : 'cursor-pointer') : 
+                                  '')
+                    "
+          *ngFor="let d of def; let j = index"
+          (click)="select(a, d[2]); selectCell(a, d[6]);">
+        {{ d[2]==='' || (d[2] && d[2].includes('fBold') && !fBold(a, d[2])) ? 
+          (a[j][0][a[j][1]] | genericPipe : d[5]) : '' }}
+        <b *ngIf="d[2]==='bold'">{{ a[j][0][a[j][1]] | genericPipe : d[5] }}</b>
+        <b *ngIf="d[2] && d[2].includes('fBold') && fBold(a, d[2])">{{ a[j][0][a[j][1]] | genericPipe : d[5] }}</b>
+        <label *ngIf="d[2]==='checkbox'">
+          <input type="checkbox" [(ngModel)]="a[j][0][a[j][1]]" 
+            [disabled]="!d[3] || component._detailMode" (click)="dirtyForm()" />
+          <span></span>
+        </label>
+        <input *ngIf="d[2]==='text'" type="text" maxlength="{{d[4] ? d[4] : 1 }}" [(ngModel)]="a[j][0][a[j][1]]" 
+            [disabled]="!d[3] || component._detailMode" (change)="dirtyForm()" />
+        <input *ngIf="d[2]==='integer'" type="text" maxlength="{{d[4] ? d[4] : 1 }}"
+            [ngModel]="a[j][0][models[i][j][1]]" (changeValue)="a[j][0][a[j][1]]=$event"
+            [disabled]="!d[3] || component._detailMode" (change)="dirtyForm()" integerFormat />
+        <input *ngIf="d[2]==='number'" type="text" maxlength="{{d[4] ? d[4] : 1 }}"
+            [ngModel]="a[j][0][models[i][j][1]]" (changeValue)="a[j][0][a[j][1]]=$event"
+            [disabled]="!d[3] || component._detailMode" (change)="dirtyForm()" numberFormat />
+        <input *ngIf="d[2]==='date'" type="text" maxlength="{{d[4] ? d[4] : 1 }}"
+            [ngModel]="a[j][0][models[i][j][1]]" (changeValue)="a[j][0][a[j][1]]=$event"
+            [disabled]="!d[3] || component._detailMode" (change)="dirtyForm()" dateFormat />
+        <input *ngIf="d[2]==='dateTime'" type="text" maxlength="{{d[4] ? d[4] : 1 }}"
+            [ngModel]="a[j][0][models[i][j][1]]" (changeValue)="a[j][0][a[j][1]]=$event"
+            [disabled]="!d[3] || component._detailMode" (change)="dirtyForm()" dateTimeFormat />
+      </td>
+      <td class="center">
+          <i class="material-icons" *ngIf="delete && !component._detailMode"  
+            (click)="remove(a)">delete</i>
+      </td>
+    </tr>
+  </tbody>
+</div>

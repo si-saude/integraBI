@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col s1" *ngIf="!component._detailMode && showAdd">
+    <button class="btn-floating waves-effect waves-light right"
+      (click)="add()" [disabled]="!object.id || object.id === 0 || disabled"> 
+      <i class="material-icons center-icon">add</i>
+    </button>
+  </div>
+  <app-generic-label [width]="width">{{label}}
+    <input type="text" name="{{name}}" [ngModel]="objectAux[lastProperty]"
+      maxlength="{{maxLength}}" [disabled]="component._detailMode || disabled" (ngModelChange)="refresh($event);" (blur)="validate()"
+      [placeholder]="!component._detailMode ? 'Digite a informação para a busca' : ''">
+  </app-generic-label>
+  <ng-content></ng-content>
+</div>
+<div class="row">
+  <ul [ngClass]="array && array.length > 0 ? 'search-drop-down col s' + width : 'search-drop-down'" [ngStyle]="{'left': !component._detailMode && showAdd ? '12%' : '' }">
+    <li class='search-results' *ngFor="let a of array" (click)="confirm(a)">{{helper.getProperty(a,property)}}</li>
+  </ul>
+</div>

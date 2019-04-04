@@ -1,0 +1,18 @@
+<div class="col s1">
+  <button class="btn-floating waves-effect waves-light right"
+    (click)="add()" [disabled]="object.id === 0" *ngIf="!component._detailMode"> 
+    <i class="material-icons center-icon">add</i>
+  </button>
+</div>
+<div class="col s4">
+  <select name="{{name}}" class="browser-default text-area" [(ngModel)]="object"
+  *ngIf="!component._detailMode">
+    <option *ngFor="let a of array" [ngValue]='a'>{{helper.getProperty(a,property)}}</option>
+  </select>
+</div>
+<div class="col s1">
+  <button class="btn-floating waves-effect waves-light left"(click)="refresh()"
+    *ngIf="!component._detailMode"> 
+    <i class="material-icons center-icon">cached</i>
+  </button>
+</div>

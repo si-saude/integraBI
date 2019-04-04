@@ -1,0 +1,20 @@
+<div class="dialog" *ngIf="component.modalIsShowed()" (keydown)="keyDown($event)">
+    <div class="modal-body">
+        <span *ngIf="!closeDisabled" class="close" (click)="component.closeModal();">&times;</span>
+        <h4>{{title}}</h4>
+        <br>
+        <ng-content></ng-content>
+        <br>
+        <div class="row">
+            <div class="col s8">
+            </div>
+            <div class="col s2">
+                <button class="btn-small btn-submit right" (click)="component.confirmModal();" #btnConf>Confirmar</button>
+            </div>
+            <div class="col s2">
+                <button class="btn-small btn-submit right" [disabled]="closeDisabled" (click)="component.closeModal();">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div [ngClass]="component.modalIsShowed() ? 'modal-background' : '' " ></div>

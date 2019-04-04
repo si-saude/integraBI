@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col s1" *ngIf="!component._detailMode && showAdd">
+    <button class="btn-floating waves-effect waves-light right"
+      (click)="add()" [disabled]="!objectAux[lastProperty] || objectAux[lastProperty] === '' || disabled"> 
+      <i class="material-icons center-icon">add</i>
+    </button>
+  </div>
+  <app-generic-label [width]="width" [ngSwitch]="directive">{{label}}
+    <input *ngSwitchCase="''"
+      type="text" name="{{name}}" [(ngModel)]="objectAux[lastProperty]"
+      maxlength="{{maxLength}}" [disabled]="component._detailMode || disabled">
+    <input *ngSwitchCase="'phoneFormat'"
+      type="text" name="{{name}}" [ngModel]="objectAux[lastProperty]" phoneFormat
+      maxlength="{{maxLength}}" [disabled]="component._detailMode || disabled"
+      (changeValue)="objectAux[lastProperty]=$event">
+  </app-generic-label>
+</div>

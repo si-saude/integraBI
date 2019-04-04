@@ -1,0 +1,24 @@
+<form #loginForm="ngForm" class="col s12 white">
+  <div class="row">
+    <div class="input-field col s12">
+      <i class="material-icons prefix">account_circle</i>
+      <input type="text" #chave="ngModel" [(ngModel)]="t.chave" name="chave" 
+        (blur)="check(chave)" placeholder="Chave" required>
+        <span *ngIf="!chave.valid" class="input-error">Informe uma chave válida</span>
+    </div>
+  </div>
+  <div class="row">
+      <div class="input-field col s12">
+        <i class="material-icons prefix">vpn_key</i>
+        <input type="password" #password="ngModel" [(ngModel)]="t.password" name="password" 
+          [disabled]="!chave.valid" placeholder="Senha" required>
+      </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+          <button [disabled]="!loginForm.valid" class="btn-large btn-submit" 
+          type="submit" (click)="autenticar()">Entrar</button>
+          <a routerLink='/nova-senha'>Esqueci minha senha</a>
+        </div>
+      </div>
+</form>

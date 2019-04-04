@@ -1,0 +1,27 @@
+<div class="col s1">
+  <button type="button" class="btn-floating waves-effect waves-light right" (click)="open()" 
+    *ngIf="!component._detailMode && !disabled"> 
+    <i class="material-icons center-icon">add</i>
+  </button>
+</div>
+<div class="dialog" *ngIf="_show">
+  <div class="modal-body">
+    <span class="close" (click)="close();">&times;</span>
+    <h4>{{title}}</h4>
+    <br>
+    <ng-content></ng-content>
+    <br>
+    <div class="row">
+      <div class="col s8">
+      </div>
+      <div class="col s2">
+          <button class="btn-small btn-submit right" *ngIf="btnConfirm"
+            (click)="confirmAndClose();">Confirmar</button>
+      </div>
+      <div class="col s2">
+          <button class="btn-small btn-submit right" (click)="close();">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div [ngClass]="_show ? 'modal-background' : '' " ></div>

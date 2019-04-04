@@ -1,0 +1,17 @@
+﻿<app-list-component 
+    [component]="this"
+    [adicionar]="'USUARIO_ADICIONAR'"
+    [editar]="'USUARIO_EDITAR'"
+    [detalhar]="'USUARIO_DETALHAR'"
+    [remover]="'USUARIO_REMOVER'"
+    >
+</app-list-component>
+
+<app-generic-modal [title]="'Filtrar'" [component]="this">
+    <div class="row">
+        <app-generic-label [width]="'3'">Chave
+            <input type="text" name="chave" [(ngModel)]="filter.chave" maxlength="8" modalConfirm
+            (changeValue)="filter.chave = $event">
+        </app-generic-label>
+    </div>
+</app-generic-modal>

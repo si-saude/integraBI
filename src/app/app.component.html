@@ -1,0 +1,79 @@
+<router-outlet></router-outlet>
+
+<div class="dialog" *ngIf="dialogService._show">
+    <div class="modal-body">
+        <span class="close" (click)="dialogService.hide();">&times;</span>
+        <h4>Informação</h4>
+        <br>
+        <p>
+            {{ dialogService._message }}
+        </p>
+    </div>
+</div>
+<div [ngClass]="dialogService._show ? 'modal-background' : '' " ></div>
+
+<div class="dialog" *ngIf="confirmService._show">
+    <div class="modal-body">
+        <span class="close" (click)="confirmService.hide();">&times;</span>
+        <h4>Confirmação</h4>
+        <br>
+        <p>
+            {{ confirmService._message }}
+        </p>
+        <br>
+        <div class="row">
+            <div class="col s8">
+            </div>
+            <div class="col s2">
+                <button class="btn-small btn-submit right" (click)="confirmService.confirm();">Confirmar</button>
+            </div>
+            <div class="col s2">
+                <button class="btn-small btn-submit right" (click)="confirmService.hide();">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div [ngClass]="confirmService._show ? 'modal-background' : '' " ></div>
+
+<div class="preloader-wrapper big active center-align spinner" *ngIf="spinnerService._show">
+    <div class="spinner-layer spinner-blue">
+        <div class="circle-clipper left">
+        <div class="circle"></div>
+        </div><div class="gap-patch">
+        <div class="circle"></div>
+        </div><div class="circle-clipper right">
+        <div class="circle"></div>
+        </div>
+    </div>
+
+    <div class="spinner-layer spinner-red">
+        <div class="circle-clipper left">
+        <div class="circle"></div>
+        </div><div class="gap-patch">
+        <div class="circle"></div>
+        </div><div class="circle-clipper right">
+        <div class="circle"></div>
+        </div>
+    </div>
+
+    <div class="spinner-layer spinner-yellow">
+        <div class="circle-clipper left">
+        <div class="circle"></div>
+        </div><div class="gap-patch">
+        <div class="circle"></div>
+        </div><div class="circle-clipper right">
+        <div class="circle"></div>
+        </div>
+    </div>
+
+    <div class="spinner-layer spinner-green">
+        <div class="circle-clipper left">
+        <div class="circle"></div>
+        </div><div class="gap-patch">
+        <div class="circle"></div>
+        </div><div class="circle-clipper right">
+        <div class="circle"></div>
+        </div>
+    </div>
+</div>
+<div [ngClass]="spinnerService._show ? 'modal-background' : '' " ></div>

@@ -1,0 +1,41 @@
+<nav>
+    <div class="nav-wrapper #009688 teal"> 
+        <a href="/home" class="brand-logo center">
+        <i class="material-icons">cloud</i>INTEGRA Saúde BI</a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <li>
+                <div class="menu-icon" (click)="toggleSidebar()">
+                    <span class="menu-icon-item"></span>
+                    <span class="menu-icon-item"></span>
+                    <span class="menu-icon-item"></span>
+                </div>
+                <div class="router-name"> <h6>{{ router.routerState.snapshot.url }}</h6> </div>
+            </li>
+        </ul>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li>
+                <a (click)="logout()">Sair</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div id="sidebar" class="sidebar">
+    <div id="principal">
+        <ul><li><a class="menuoption" (click)="goToCadastro()">Cadastro</a></li></ul>
+    </div>
+    <div id="cadastro" style="display: none">
+        <ul><li><a class="menuoption" (click)="goToPrincipal()"><i class="material-icons">chevron_left</i></a></li></ul>
+        <app-menu-option [label]="'Perfil'" [routerLink]="'/perfil'" [funcionalidade]="'PERFIL_LISTAR'" [homeComponent]="this"></app-menu-option>
+        <app-menu-option [label]="'Usuário'" [routerLink]="'/usuario'" [funcionalidade]="'USUARIO_LISTAR'" [homeComponent]="this"></app-menu-option>
+        <br>
+        <br>
+    </div>
+</div>
+<div [ngClass]="showMenu ? 'card-content container' : 'card-content large-container'">
+    <div class="row" style="width:93%">
+        <br>
+        <router-outlet></router-outlet>
+        <br>
+    </div>
+    <br>
+</div>

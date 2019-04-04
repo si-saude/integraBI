@@ -1,0 +1,17 @@
+<app-list-component 
+    [component]="this"
+    [adicionar]="'PERFIL_ADICIONAR'"
+    [editar]="'PERFIL_EDITAR'"
+    [detalhar]="'PERFIL_DETALHAR'"
+    [remover]="'PERFIL_REMOVER'"
+    >
+</app-list-component>
+
+<app-generic-modal [title]="'Filtrar'" [component]="this">
+    <div class="row">
+        <app-generic-label [width]="'8'">Título
+            <input type="text" name="titulo" [(ngModel)]="filter.titulo" maxlength="60" modalConfirm
+            (changeValue)="filter.titulo = $event">
+        </app-generic-label>
+    </div>
+</app-generic-modal>

@@ -1,0 +1,23 @@
+<form class="col s12" #form="ngForm">
+  <app-form-component [component]="this">
+    <app-generic-tab [tabs]="[[dadosGeraisTab,'DADOS GERAIS'],[permissoesTab,'PERMISSÕES']]">
+      <div #dadosGeraisTab>
+        <div class="row">
+          <app-generic-label [width]="'8'">Título
+            <input class="validate" type="text" name="titulo" #titulo="ngModel" [ngModel]="t.titulo"
+              (ngModelChange)="t.titulo=$event.toUpperCase()" maxlength="60" [disabled]="_detailMode" required>
+            <span class="helper-text" [attr.data-error]="showErrorMessage(titulo.errors)"></span>
+          </app-generic-label>
+        </div>
+      </div>
+      <div #permissoesTab>
+        <div class="row">
+          <app-generic-grid [component]="this" [array]="t.permissoes" [height]="'350px'"
+            [def]="[['Funcionalidade','funcionalidade','',''],
+                    ['Valor','valor','checkbox',true]]">
+          </app-generic-grid>
+        </div>
+      </div>
+    </app-generic-tab>
+  </app-form-component>
+</form>

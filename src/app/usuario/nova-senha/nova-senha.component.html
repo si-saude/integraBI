@@ -1,0 +1,53 @@
+<form class="col s12 white" #novaSenhaForm="ngForm">
+    <div class="row">
+      <h6 mat-dialog-title>Informe o seu e-mail para o envio do código de validação</h6>
+    </div>
+    <div class="row">
+      <div class="input-field col s7">
+        <input class="validate" type="text" name="email" #email="ngModel" [(ngModel)]="t.email" 
+        (blur)="checkEmail(email)" [pattern]="emailPattern" maxlength="256" required>
+        <label>Email</label>
+        <span *ngIf="!email.valid"  style="color:red;font-size: small">{{showErrorMessage(email.errors)}}</span>
+      </div>
+      <div class="input-field col s5">
+          <button [disabled]="!email.valid" class="btn waves-effect waves-light" 
+          type="button" (click)="gerarToken(email)" >Enviar código</button>
+      </div>
+    </div>
+    <br>
+    <div *ngIf="_tokenEnviado">
+      <div class="row">
+        <h6 mat-dialog-title>Copie e cole o código recebido no seu email no campo abaixo,
+          e informe a sua nova senha
+        </h6>
+      </div>
+      <div class="row">
+          <div class="input-field col s12">
+              <input class="validate" type="text" name="token" #token="ngModel" [(ngModel)]="t.token" required>
+              <label>Código</label>
+              <span *ngIf="!token.valid"  style="color:red;font-size: small">{{showErrorMessage(token.errors)}}</span>
+            </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <input class="validate" type="password" name="password" #password="ngModel" [(ngModel)]="t.password" 
+                minlength="6" maxlength="16" validateEqual="senhaConfirm" required>
+          <label>Nova senha</label>
+          <span *ngIf="!password.valid" style="color:red;font-size: small">{{showErrorMessage(password.errors)}}</span>
+        </div>
+        <div class="input-field col s6">
+          <input class="validate" type="password" name="senhaConfirm" #senhaConfirm="ngModel" 
+              [(ngModel)]="t.senhaConfirm" minlength="6" maxlength="16" validateEqual="password" 
+              required>
+          <label>Confirme a senha</label>
+          <span *ngIf="!senhaConfirm.valid"  style="color:red;font-size: small">{{showErrorMessage(senhaConfirm.errors)}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <button [disabled]="!novaSenhaForm.valid" class="btn-large btn-submit" 
+          type="button" (click)="enviar(email)">Enviar</button>
+        </div>
+      </div>
+    </div>
+</form>

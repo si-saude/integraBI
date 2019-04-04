@@ -1,0 +1,14 @@
+<select style="width:85%" name="{{name}}" class="browser-default text-area" [(ngModel)]="object"
+  *ngIf="!component._detailMode && !disabled" (change)="dirtyForm(); change();">
+  <option [ngValue]='undefined'>Selecione uma opção</option>
+  <option *ngFor="let a of array" [ngValue]='a'>{{ property ? helper.getProperty(a,property) : a}}</option>
+</select>
+<input *ngIf="component._detailMode || disabled" type="text" [disabled]="true" value="
+{{ component._detailMode || disabled ?
+    (property && object ? helper.getProperty(object,property) : object) :
+    ''
+}}">
+<button style="right:0px; position: absolute; top: 30%;" class="btn-floating waves-effect waves-light right"(click)="doRefresh();"
+  *ngIf="!component._detailMode && !disabled && refresh"> 
+  <i class="material-icons center-icon">cached</i>
+</button>

@@ -1,0 +1,36 @@
+﻿<form class="col s12" #form="ngForm">
+  <app-form-component [component]="this">
+
+    <app-generic-tab [tabs]="[[dadosGeraisTab,'DADOS GERAIS'],[perfisTab,'PERFIS']]">
+      <div #dadosGeraisTab>
+        <div class="row">
+          <app-generic-label [width]="'3'">Chave
+            <input class="validate" type="text" name="chave" #chave="ngModel" [(ngModel)]="t.chave" maxlength="8" [disabled]="_detailMode"
+              required>
+            <span class="helper-text" [attr.data-error]="showErrorMessage(chave.errors)"></span>
+          </app-generic-label>
+        </div>
+        <div class="row">
+          <app-generic-label [width]="'4'">Senha
+            <input class="validate" type="password" name="password" #password="ngModel" [(ngModel)]="t.password" maxlength="30" [disabled]="_detailMode"
+              required>
+            <span class="helper-text" [attr.data-error]="showErrorMessage(password.errors)"></span>
+          </app-generic-label>
+          <app-generic-label [width]="'1'">Gestor CSS
+              <input type="checkbox" name="gestorCss" #gestorCss="ngModel" [(ngModel)]="t.gestorCss" [disabled]="_detailMode"  />
+              <span></span>
+            </app-generic-label>
+        </div>
+      </div>
+      <div #perfisTab>
+        <div class="row">
+          <app-generic-grid #gridPerfil [id]="'perfis'" [component]="this" [array]="t.perfis" [height]="'350px'" [delete]="true" [def]="[['Título','titulo','','']]">
+            <app-generic-autocomplete #autocompletePerfil [name]="'perfil'" [property]="'titulo'" [component]="this" [maxLength]="60" [width]="'4'"
+              [label]="'Perfil'" [service]="servico.getPerfilService()" [showAdd]="true" (responseAdd)="gridPerfil.add($event)">
+            </app-generic-autocomplete>
+          </app-generic-grid>
+        </div>
+      </div>
+    </app-generic-tab>
+  </app-form-component>
+</form>

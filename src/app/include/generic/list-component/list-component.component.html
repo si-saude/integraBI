@@ -1,0 +1,41 @@
+<table class="zui-table highlight">
+    <thead>
+        <tr>
+            <th *ngFor="let ar of component.tableDef">{{ar[0]}}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let a of component.array">
+            <td *ngFor="let ar of component.tableDef">{{ getProperty(a,ar[1],ar[2]) | limitCharacter:128 }}</td>
+            <td class="center">
+                <i class="tooltip material-icons" routerLink="{{'./detalhar/' + a.id }}" *ngIf="canDetalhar">details
+                    <span class="tooltiptext">DETALHAR</span>
+                </i>
+                <i class="tooltip material-icons" routerLink="{{'./editar/' + a.id }}" *ngIf="canEditar">mode_edit
+                    <span class="tooltiptext">EDITAR</span>
+                </i>
+                <i class="tooltip material-icons" *ngIf="canRemover" (click)="remove(a.id)">delete
+                    <span class="tooltiptext">REMOVER</span>
+                </i>
+                <i *ngFor="let f of functions" class="tooltip material-icons"(click)="component[f[1]](a)">{{f[0]}}
+                    <span class="tooltiptext">{{f[2]}}</span>
+                </i>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br>
+<input type="hidden" id="pageNumber"/>
+<button id="paginator" (click)="component.callPage()" style="display:none"></button>
+<div class="row">
+    <div class="col s2">
+        <button class="btn-small btn-submit" (click)="component.openFilterModal()">Filtrar</button>
+    </div>
+    <div class="col s8">
+        <div id="pagination" class="pagination"></div>
+    </div>
+    <div class="col s2">
+        <button class="btn-small btn-submit" routerLink="./adicionar" *ngIf="canAdicionar">Adicionar</button>
+    </div>
+</div>
